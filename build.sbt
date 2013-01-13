@@ -31,3 +31,10 @@ libraryDependencies += "junit" % "junit" % "4.10" % "test"
 mainClass in assembly := Some("fr.janalyse.script.Bootstrap")
 
 jarName in assembly := "bootstrap.jar"
+
+mergeStrategy in assembly <<= (mergeStrategy in assembly) { (old) =>
+  {
+    case PathList("org", "fusesource", xs @ _*) => MergeStrategy.first
+    case x => old(x)
+  }
+}
