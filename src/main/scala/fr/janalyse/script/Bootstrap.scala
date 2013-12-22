@@ -66,7 +66,7 @@ object Bootstrap {
   def main(cmdargs: Array[String]) {
     val bootstrapOptions = makeBootstrapOptions(cmdargs)
     val command = new GenericRunnerCommand(defaultOptions ++ bootstrapOptions.args)
-    val scriptDir = new File(bootstrapOptions.args(0)).getParentFile()
+    val scriptDir = new File(bootstrapOptions.args(0)).getAbsoluteFile().getParentFile()
     val includePath = List(new File(scriptDir, "include"), scriptDir)
     val availableIncludes = includePath filter { _.exists() } flatMap { _.listFiles() }
     val scriptname = command.thingToRun
